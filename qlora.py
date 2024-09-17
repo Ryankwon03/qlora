@@ -619,8 +619,10 @@ def make_data_module(tokenizer: transformers.PreTrainedTokenizer, args) -> Dict:
                 'output': x['chosen']
             })
         elif dataset_format == 'evil':
+            dataset = dataset.map(lambda x: {
                 'input': '',
                 'output': x['rejected']
+            })
         elif dataset_format == 'oasst1' or (dataset_format is None and args.dataset == 'oasst1'):
             dataset = dataset.map(lambda x: {
                 'input': '',
